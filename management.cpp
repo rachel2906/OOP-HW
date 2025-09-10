@@ -345,37 +345,18 @@ public:
 
 // MAIN
 int main() {
-    // Tạo bệnh nhân thường
+    // Create regular 
     Patient p1("Alice", "P001", 25);
     p1.addMedicalHistory("Flu - 2023");
-    p1.addMedicalHistory("Check-up - 2024");
-
-    // Tạo bệnh nhân mãn tính
-    ChronicPatient cp1("Bob", "P002", 50, "Diabetes", "2025-01-10");
-    cp1.addMedicalHistory("Diabetes diagnosis - 2020");
-    cp1.addMedicalHistory("Blood sugar check - 2024");
-    cp1.setTreatmentPlan("Daily insulin, diet monitoring");
-    cp1.setNextAppointmentDate("2025-12-01");
-    cp1.addMedication("Insulin");
-    cp1.addMedication("Metformin");
-
-    // Tạo bác sĩ
-    Doctor d1("Dr. Smith", "D001", "Cardiology");
-    d1.setPhoneNumber("0123456789");
-    d1.setEmail("dr.smith@hospital.com");
-    d1.setExperienceYears(15);
-    d1.addCertification("Cardiology Specialist");
-    d1.addCertification("Endocrinology Training");
-
-    // Tạo các cuộc hẹn
+    p1.addMedicalHistory("Check-up appointment");
     Appointment a1("2025-09-12", "10:00", "Routine check-up", p1, d1.getId());
     Appointment a2("2025-09-15", "14:00", "Diabetes follow-up", cp1, d1.getId());
 
-    // Thêm cuộc hẹn cho bác sĩ
+    // Add appointment for doctor
     d1.addAppointment(a1);
     d1.addAppointment(a2);
 
-    // Hiển thị thông tin bệnh nhân
+    // Display patient information
     cout << "PATIENTS\n";
     p1.displayInfo();
     p1.showMedicalHistory();
@@ -386,7 +367,7 @@ int main() {
     cp1.showMedications();         
     cout << "Doctor Notes: " << cp1.getDoctorNotes() << endl;
 
-    // Hiển thị thông tin bác sĩ và các cuộc hẹn
+// Doctor infomation & appointments 
     cout << "\nDOCTOR INFO & APPOINTMENTS\n";
     cout << "Doctor: " << d1.getName() << " (" << d1.getSpecialty() << ")\n";
     cout << "Phone: " << d1.getPhoneNumber() << ", Email: " << d1.getEmail() << endl;
@@ -394,8 +375,7 @@ int main() {
     d1.showCertifications();       
     cout << "\n";
     d1.viewAppointments();
-
-    // Cập nhật trạng thái cuộc hẹn
+// Update status
     cout << "\nUPDATING STATUS\n";
     cout << "Updating appointment 1\n";
     a1.updateStatus("completed");
@@ -406,4 +386,5 @@ int main() {
 
     return 0;
 }
+
 
