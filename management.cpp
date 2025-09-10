@@ -34,7 +34,7 @@ public:
         id = "Unknown";
         age = 0;
         active = true;
-        registrationDate = "2025-01-01";
+        registrationDate = "10-09-2025";
         visitCount = 0;
     }
 
@@ -43,7 +43,7 @@ public:
         this->id = id;
         this->age = age;
         active = true;
-        registrationDate = "2025-01-01";
+        registrationDate = "10-09-2025";
         visitCount = 0;
     }
 
@@ -74,7 +74,7 @@ public:
 
     void showMedicalHistory() {
         cout << "Medical History of " << name << ":\n";
-        for (string h : medicalHistory) {
+        for (string h : medicalHistory ) {
             cout << "- " << h << endl;
         }
     }
@@ -100,7 +100,7 @@ public:
     }
 
     void scheduleAppointment() {
-        cout << "Scheduling appointment for regular patient.\n";
+        cout << "Appointment for regular patient\n";
     }
 
     void displayInfo() {
@@ -152,8 +152,7 @@ public:
         riskLevel = r;
     }
     void addMedication(string med) {
-        medications.push_back(med);
-    }
+        medications.push_back(med);}
     void showMedications() {
         cout << "Medications: " << getName();
         if (medications.empty()) {
@@ -407,3 +406,4 @@ int main() {
 
     return 0;
 }
+
