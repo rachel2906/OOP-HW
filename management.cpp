@@ -8,25 +8,27 @@ using namespace std;
 class Human {
 public:
     Human() {
-        cout << "Human created\n";
+        cout << "Human created"<<endl;
     }
+
+    // Display general information of a human
     void displayInfo() {
-        cout << "Human Info\n";
+        cout << "Human Info"<<endl;
     }
 };
 
 // PATIENT
 class Patient : public Human {
 private:
-    bool active;
-    string registrationDate;
-    int visitCount;
+    bool active;                 // The patient is active
+    string regisDate;            // Registration date of the patient
+    int visit;                   // Number of visits
 
 protected:
-    string name;
-    string id;
-    int age;
-    vector<string> medicalHistory;
+    string name;                 // Patient name
+    string id;                   // Patient ID
+    int age;                     // Patient age
+    vector<string> medicalHistory; // List of medical history
 
 public:
     Patient() {
@@ -34,8 +36,8 @@ public:
         id = "Unknown";
         age = 0;
         active = true;
-        registrationDate = "10-09-2025";
-        visitCount = 0;
+        regisDate = "2025-01-01";
+        visit = 0;
     }
 
     Patient(string name, string id, int age) {
@@ -43,118 +45,93 @@ public:
         this->id = id;
         this->age = age;
         active = true;
-        registrationDate = "10-09-2025";
-        visitCount = 0;
+        regisDate = "2025-01-01";
+        visit = 0;
     }
 
-    // Getter & Setter 
-    string getName() {
-        return name;
-    }
-    string getId() {
-        return id;
-    }
-    int getAge() {
-        return age;
-    }
-    void setName(string n) {
-        name = n;
-    }
-    void setId(string i) {
-        id = i;
-    }
-    void setAge(int a) {
-        age = a;
-    }
+    // Getter and Setter
+    string getName() { return name; }
+    string getId() { return id; }
+    int getAge() { return age; }
+    void setName(string n) { name = n; }
+    void setId(string i) { id = i; }
+    void setAge(int a) { age = a; }
 
+    // Add a record to patient medical history
     void addMedicalHistory(string record) {
         medicalHistory.push_back(record);
-        visitCount++;
+        visit++;
     }
 
+    // Display  medical history of the patient
     void showMedicalHistory() {
-        cout << "Medical History of " << name << ":\n";
-        for (string h : medicalHistory ) {
+        cout << "Medical History of " << name << ":"<<endl;
+        for (string h : medicalHistory) {
             cout << "- " << h << endl;
         }
     }
 
-    void deactivate() {
-        active = false;
+    // The patient is not active 
+    void deactivate() { active = false; }
+
+    // Check if patient is active
+    bool isActive() { return active; }
+
+    void setRegisDate(string date) { regisDate = date; }
+    string getRegisDate() { return regisDate; }
+    int getVisit() { return visit; }
+
+    // Virtual method to schedule appointment
+    virtual void scheduleAppointment() {
+        cout << "Scheduling appointment for regular patient.\n";
     }
 
-    bool isActive() {
-        return active;
-    }
-
-    void setRegistrationDate(string date) {
-        registrationDate = date;
-    }
-
-    string getRegistrationDate() {
-        return registrationDate;
-    }
-
-    int getVisitCount() {
-        return visitCount;
-    }
-
-    void scheduleAppointment() {
-        cout << "Appointment for regular patient\n";
-    }
-
+    // Show patient information
     void displayInfo() {
         cout << "Patient Info:\n";
         cout << "Name: " << name << ", Age: " << age << ", ID: " << id << endl;
-        cout << "Registration Date: " << registrationDate 
-             << ", Visits: " << visitCount << endl;
+        cout << "Registration date: " << regisDate;
+        cout << ", Visit: " << visit << endl;
     }
 };
-
-// CHRONIC PATIENT 
+// CHRONIC PATIENT
 class ChronicPatient : public Patient {
 private:
-    string conditionType;
-    string lastCheckupDate;
-    string riskLevel;
-    vector<string> medications;
-    string doctorNotes;
+    string conditionType;       // Type of chronic condition 
+    string last;                // Last check up date
+    string risk;                // Risk level 
+    vector<string> medications; // List of medications
+    string doctorNotes;         // Doctor notes about the patient
 
 protected:
-    string treatmentPlan;
-    string nextAppointmentDate;
+    string treatmentPlan;       // Treatment plan for patient
+    string nextAppointmentDate; // Next scheduled appointment
 
 public:
     ChronicPatient(string name, string id, int age, string conditionType, string lastCheckupDate)
         : Patient(name, id, age) 
     {
         this->conditionType = conditionType;
-        this->lastCheckupDate = lastCheckupDate;
-        riskLevel = "Medium";
+        this->last= lastCheckupDate;
+        risk = "Medium";
         doctorNotes = "Nope";
         treatmentPlan = "General monitoring";
         nextAppointmentDate = "Not scheduled";
     }
 
-    string getConditionType() {
-        return conditionType;
-    }
-    void setConditionType(string c) {
-        conditionType = c;
-    }
-    string getLastCheckupDate() {
-        return lastCheckupDate;
-    }
-    void setLastCheckupDate(string d) {
-        lastCheckupDate = d;
-    }
-    void setRiskLevel(string r) {
-        riskLevel = r;
-    }
-    void addMedication(string med) {
-        medications.push_back(med);}
+    // Getter and Setter
+    string getConditionType() { return conditionType; }
+    void setConditionType(string c) { conditionType = c; }
+    string getLast() { return last; }
+    void setLast(string d) { last = d; }
+    void setRisk(string r) { risk = r; }
+
+    // Add a medication to list
+    void addMedication(string med) { medications.push_back(med); }
+
+    // Show list of medication
     void showMedications() {
-        cout << "Medications: " << getName();
+        cout << "Medications of " << getName() << ": ";
         if (medications.empty()) {
             cout << "NONE";
         } else {
@@ -167,47 +144,43 @@ public:
         }
         cout << endl;
     }
-    void setDoctorNotes(string notes) {
-        doctorNotes = notes;
-    }
-    string getDoctorNotes() {
-        return doctorNotes;
-    }
-    void setNextAppointmentDate(string d) {
-        nextAppointmentDate = d;
-    }
-    void setTreatmentPlan(string plan) {
-        treatmentPlan = plan;
-    }
 
-    void scheduleAppointment() {
+    void setDoctorNotes(string n) { doctorNotes = n; }
+    string getDoctorNotes() { return doctorNotes; }
+    void setNextAppointmentDate(string d) { nextAppointmentDate = d; }
+    void setTreatmentPlan(string plan) { treatmentPlan = plan; }
+
+    // Override scheduleAppointment for chronic patients
+    void scheduleAppointment() override {
         cout << "Scheduling mandatory check-up every 3 months\n";
     }
 
+    // Show chronic patient details
     void displayInfo() {
         Patient::displayInfo();
-        cout << "Condition: " << conditionType << ", Last Check-up: " << lastCheckupDate << endl;
-        cout << "Risk Level: " << riskLevel << ", Treatment Plan: " << treatmentPlan << endl;
+        cout << "Condition: " << conditionType << ", Last Check-up: " << last << endl;
+        cout << "Risk level: " << risk << ", Treatment Plan: " << treatmentPlan << endl;
         cout << "Next Appointment: " << nextAppointmentDate << endl;
     }
 };
-
 // APPOINTMENT
 class Appointment {
 private:
-    string date;
-    string time;
-    string reason;
-    string status;
-    Patient patient;    
-    string doctorId;
-    string location;
-    string notes;
+    string date;        // Appointment date
+    string time;        // Appointment time
+    string reason;      // Reason for appointment
+    string status;      // Status 
+    Patient patient;    // Patient linked to appointment
+    string doctorId;    // Doctor ID handling the appointment
+    string location;    // Location of appointment
+    string notes;       // Notes
 
+    // Validate appointment status
     bool isValidStatus(string s) {
         return (s == "SCHEDULED" || s == "COMPLETED" || s == "CANCELED");
     }
 
+    // Convert string to uppercase
     string toUpperCase(string s) {
         for (auto& c : s) {
             c = (char) toupper((unsigned char)c);
@@ -216,7 +189,7 @@ private:
     }
 
 protected:
-    string appointmentType;
+    string appointmentType; // Appointment type
 
 public:
     Appointment(string date, string time, string reason, Patient p, string doctorId)
@@ -232,7 +205,8 @@ public:
         this->appointmentType = "Offline";
     }
 
-    void updateStatus(string s) {
+    // Change status of appointment
+    void changeStatus(string s) {
         s = toUpperCase(s);
         if (isValidStatus(s)) {
             status = s;
@@ -240,21 +214,14 @@ public:
             cout << "Invalid status\n";
         }
     }
-    void setLocation(string loc) {
-        location = loc;
-    }
-    string getLocation() {
-        return location;
-    }
-    void setNotes(string n) {
-        notes = n;
-    }
-    string getNotes() {
-        return notes;
-    }
-    string getStatus() {
-        return status;
-    }
+
+    void setLocation(string loc) { location = loc; }
+    string getLocation() { return location; }
+    void setNotes(string n) { notes = n; }
+    string getNotes() { return notes; }
+    string getStatus() { return status; }
+
+    // Display appointment details
     void displayInfo() {
         cout << "Appointment: " << date << " " << time << " | Reason: " << reason << endl;
         cout << "Doctor ID: " << doctorId << " | Status: " << status << endl;
@@ -266,16 +233,16 @@ public:
 // DOCTOR
 class Doctor {
 private:
-    string name;
-    string id;
-    string specialty;
-    vector<Appointment> appointments;
-    string phoneNumber;
-    string email;
+    string name;                    // Doctor name
+    string id;                      // Doctor ID
+    string specialty;               // Doctor specialty field
+    vector<Appointment> appointments; // List of appointments handled by doctor
+    string phoneNumber;             // Contact phone number
+    string email;                   // Contact email
 
 protected:
-    int experienceYears;
-    vector<string> certifications;
+    int experienceYears;            // Years of experience
+    vector<string> certifications;  // List of certifications
 
 public:
     Doctor(string name, string id, string specialty) {
@@ -287,39 +254,24 @@ public:
         experienceYears = 0;
     }
 
-    string getName() {
-        return name;
-    }
-    string getId() {
-        return id;
-    }
-    string getSpecialty() {
-        return specialty;
-    }
-    string getPhoneNumber() {
-        return phoneNumber;
-    }    
-    string getEmail() {
-        return email;
-    }                
-    int getExperienceYears() {
-        return experienceYears;
-    } 
-    void setPhoneNumber(string p) {
-        phoneNumber = p;
-    }
-    void setEmail(string e) {
-        email = e;
-    }
-    void addCertification(string cert) {
-        certifications.push_back(cert);
-    }
-    void setExperienceYears(int y) {
-        experienceYears = y;
-    }
-    void addAppointment(Appointment a) {
-        appointments.push_back(a);
-    }
+    // Getter and Setter
+    string getName() { return name; }
+    string getId() { return id; }
+    string getSpecialty() { return specialty; }
+    string getPhoneNumber() { return phoneNumber; }    
+    string getEmail() { return email; }                
+    int getExperienceYears() { return experienceYears; }
+    void setPhoneNumber(string p) { phoneNumber = p; }
+    void setEmail(string e) { email = e; }
+    void setExperienceYears(int y) { experienceYears = y; }
+
+    // Add certification
+    void addCertification(string cert) { certifications.push_back(cert); }
+
+    // Add appointment
+    void addAppointment(Appointment a) { appointments.push_back(a); }
+
+    // View doctor appointments
     void viewAppointments() {
         cout << "Appointments of: " << name << endl;
         for (auto& a : appointments) {
@@ -327,65 +279,18 @@ public:
         }
     }
 
-    void showCertifications() {
-        cout << "Certifications: ";
+    // Display doctor certifications
+    void displayCertifications() {
+        cout << "Doctor Certifications: ";
         if (certifications.empty()) {
             cout << "None";
         } else {
-            for (size_t i = 0; i < certifications.size(); i++) {
+            for (size_t i = 0; i < certifications.size(); ++i) {
                 cout << certifications[i];
                 if (i + 1 < certifications.size()) {
                     cout << ", ";
                 }
             }
         }
-        cout << endl;
     }
 };
-
-// MAIN
-int main() {
-    // Create regular 
-    Patient p1("Lan", "P001", 25);
-    p1.addMedicalHistory("Flu - 2023");
-    p1.addMedicalHistory("Check-up appointment");
-    Appointment a1("2025-09-12", "10:00", "Routine check-up", p1, d1.getId());
-    Appointment a2("2025-09-15", "14:00", "Hypertension follow-up", cp1, d1.getId());
-
-    // Add appointment for doctor
-    d1.addAppointment(a1);
-    d1.addAppointment(a2);
-
-    // Display patient information
-    cout << "PATIENTS\n";
-    p1.displayInfo();
-    p1.showMedicalHistory();
-    cout << endl;
-
-    cp1.displayInfo();
-    cp1.showMedicalHistory();
-    cp1.showMedications();         
-    cout << "Doctor Notes: " << cp1.getDoctorNotes() << endl;
-
-// Doctor infomation & appointments 
-    cout << "\nDOCTOR INFO & APPOINTMENTS\n";
-    cout << "Doctor: " << d1.getName() << " (" << d1.getSpecialty() << ")\n";
-    cout << "Phone: " << d1.getPhoneNumber() << ", Email: " << d1.getEmail() << endl;
-    cout << "Experience: " << d1.getExperienceYears() << " years\n";
-    d1.showCertifications();       
-    cout << "\n";
-    d1.viewAppointments();
-// Update status
-    cout << "\nUPDATING STATUS\n";
-    cout << "Updating appointment 1\n";
-    a1.updateStatus("completed");
-    a1.displayInfo();
-
-    cout << "\nUpdating appointment 2\n";
-    a2.updateStatus("waiting"); 
-
-    return 0;
-}
-
-
-
