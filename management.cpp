@@ -227,7 +227,7 @@ public:
         this->reason = reason;
         this->status = "SCHEDULED";
         this->doctorId = doctorId;
-        this->location = "Room 101";
+        this->location = "Room 403";
         this->notes = "Nope";
         this->appointmentType = "Offline";
     }
@@ -332,7 +332,7 @@ public:
         if (certifications.empty()) {
             cout << "None";
         } else {
-            for (size_t i = 0; i < certifications.size(); ++i) {
+            for (size_t i = 0; i < certifications.size(); i++) {
                 cout << certifications[i];
                 if (i + 1 < certifications.size()) {
                     cout << ", ";
@@ -346,11 +346,11 @@ public:
 // MAIN
 int main() {
     // Create regular 
-    Patient p1("Alice", "P001", 25);
+    Patient p1("Lan", "P001", 25);
     p1.addMedicalHistory("Flu - 2023");
     p1.addMedicalHistory("Check-up appointment");
     Appointment a1("2025-09-12", "10:00", "Routine check-up", p1, d1.getId());
-    Appointment a2("2025-09-15", "14:00", "Diabetes follow-up", cp1, d1.getId());
+    Appointment a2("2025-09-15", "14:00", "Hypertension follow-up", cp1, d1.getId());
 
     // Add appointment for doctor
     d1.addAppointment(a1);
@@ -381,10 +381,11 @@ int main() {
     a1.updateStatus("completed");
     a1.displayInfo();
 
-    cout << "\nUpdating appointment 2 with invalid status\n";
+    cout << "\nUpdating appointment 2\n";
     a2.updateStatus("waiting"); 
 
     return 0;
 }
+
 
 
